@@ -45,7 +45,7 @@ BMS-EV translates between the vehicle's original BMS and the inverter's expected
 
 ## Compatibility Matrix
 
-Full **72 batteries × 56 inverters** matrix: https://docs.bms-ev.com/compatibility/
+Full **73 batteries × 56 inverters** matrix: https://docs.bms-ev.com/compatibility/
 
 Machine-readable: [supported-batteries](https://github.com/BMS-EV/supported-batteries) · [full compatibility CSV](https://github.com/BMS-EV/bms-ev-docs/blob/main/compatibility.csv)
 
