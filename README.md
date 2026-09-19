@@ -13,7 +13,7 @@ Public database of **56 hybrid inverter models** compatible with second-life EV 
 
 | Manufacturer | Series | DC voltage range | Documentation |
 |-------------|--------|------------------|---------------|
-| **Deye** | SUN-(5-20)K HP3 AM2 (single-phase), SUN-(29.9-50)K HP3 BM3 (three-phase) | 160-800V | [Deye](https://docs.bms-ev.com/inverters/deye/) |
+| **Deye** | SUN-(5-25)K HP3 AM2 (three-phase, 1 battery input), SUN-(29.9-50)K HP3 BM3/BM4 (three-phase, 2 battery inputs) | AM2 160-700V / BM3-BM4 160-800V | [Deye](https://docs.bms-ev.com/inverters/deye/) |
 | **SOFAR** | HYD 5-20KTL-3PH | 350-800V | [SOFAR](https://docs.bms-ev.com/inverters/sofar/) |
 | **GoodWe** | EH (single-phase), ET (three-phase), ES, EHB, BH, BT, A-ES Split Phase | 40-600V (varies by series) | [GoodWe](https://docs.bms-ev.com/inverters/goodwe/) |
 | **SolaX** | X1 Hybrid, X1 Hybrid G4, X3 Hybrid, X3 Hybrid G4, X3-Ultra | 48V LV or 90-800V HV | [SolaX](https://docs.bms-ev.com/inverters/solax/) |
@@ -25,7 +25,7 @@ Public database of **56 hybrid inverter models** compatible with second-life EV 
 | **Kostal** | Plenticore Plus 3.0-10 | 120-720V | [docs](https://docs.bms-ev.com/inverters/) |
 | **Growatt** | SPH LV/HV series, WIT 50-100K-HU | 48V LV or 100-500V HV | [docs](https://docs.bms-ev.com/inverters/) |
 | **SAJ** | H2 Hybrid (3-12)K-S2 | 100-500V | [docs](https://docs.bms-ev.com/inverters/) |
-| **Huawei** | SUN2000-(2-6)KTL-L1 400V, SUN2000-(3-20)K-MB0 400V | 100-500V | [docs](https://docs.bms-ev.com/inverters/) |
+| **Huawei** | SUN2000-(2-6)KTL-L1 400V, SUN2000-(3-20)K-MB0 400V | 350-560V (LUNA2000 window) - **DC/DC converter required** | [docs](https://docs.bms-ev.com/inverters/) |
 | **Hoymiles** | HYT/HAT-HV | — | [docs](https://docs.bms-ev.com/inverters/) |
 | **Felicity** | T-REX-50KHP3G01 | — | [docs](https://docs.bms-ev.com/inverters/) |
 | **Ferroamp** | EnergyHub | 800V-capable | [docs](https://docs.bms-ev.com/inverters/) |
@@ -45,7 +45,7 @@ BMS-EV translates between the vehicle's original BMS and the inverter's expected
 
 ## Compatibility Matrix
 
-Full **73 batteries × 56 inverters** matrix: https://docs.bms-ev.com/compatibility/
+Full **70 battery/BMS profiles × 56 inverter variants** matrix (3,768 pairs): https://docs.bms-ev.com/compatibility/
 
 Machine-readable: [supported-batteries](https://github.com/BMS-EV/supported-batteries) · [full compatibility CSV](https://github.com/BMS-EV/bms-ev-docs/blob/main/compatibility.csv)
 
@@ -62,3 +62,11 @@ Missing an inverter? Have you successfully installed one that isn't listed? [Ope
 - Shop: https://bms-ev.com/
 - Documentation: https://docs.bms-ev.com/
 - Email: office@bms-ev.com
+
+## Huawei SUN2000: DC/DC converter required
+
+Huawei’s battery interface is built around its own LUNA2000 battery system, which operates in a 350-560 V DC window. Most whole EV packs do not sit inside that window across their full state-of-charge range — a Tesla Model 3 pack runs 260-410 V and a BMW i3 pack 260-395 V, both below the lower bound at mid and low SoC.
+
+A Huawei installation therefore requires a **DC/DC converter between the battery pack and the inverter’s battery input**, sized for the pack voltage range and the inverter’s rated battery power. That converter is an additional component in the bill of materials and an additional conversion stage in the energy path, so expect a round-trip efficiency penalty compared with a direct-connect inverter such as SOFAR HYD, Deye SG01HP3 or GoodWe ET, which accept the pack voltage directly. For a new build a direct-connect HV inverter is the simpler and more efficient path; the Huawei option exists where a SUN2000 is already installed.
+
+See [docs.bms-ev.com/inverters/#huawei-dcdc](https://docs.bms-ev.com/inverters/#huawei-dcdc).
